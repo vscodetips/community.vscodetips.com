@@ -1,2 +1,23 @@
-<iframe src="https://open.spotify.com/embed/playlist/0yZb2lQLmDWl33aRcSSOSu" style="min-height: 50vh;width: 100%;"
-  frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+<div id="hacker-playlist-container"></div>
+<script>
+  (async () => {
+    let isLoaded = false;
+    const day = new Date().getDay();
+    const playlist = await (
+      await fetch(`https://apis.vscodetips.com/playlists/${day}`)
+    ).text();
+
+    function loadPlaylist() {
+      if (isLoaded) {
+        return;
+      }
+
+      isLoaded = true;
+      const iframe = `<iframe id="hacker-playlist" src="${playlist}" style="min-height: 50vh;width: 100%;" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>`
+      document.getElementById('hacker-playlist-container').innerHTML = iframe;
+    }
+
+    document.addEventListener("DOMContentLoaded", loadPlaylist());
+    loadPlaylist();
+  })();
+</script>
