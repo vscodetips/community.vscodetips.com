@@ -1,4 +1,5 @@
-<div id="hacker-playlist-container"></div>
+<iframe id="hacker-playlist" style="min-height: 50vh;width: 100%;" frameBorder="0" allowtransparency="true"
+  allow="encrypted-media"></iframe>
 <script>
   (async () => {
     let isLoaded = false;
@@ -12,12 +13,15 @@
         return;
       }
 
-      isLoaded = true;
-      const iframe = `<iframe id="hacker-playlist" src="${playlist}" style="min-height: 50vh;width: 100%;" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>`
-      document.getElementById('hacker-playlist-container').innerHTML = iframe;
+      const player = document.getElementById('hacker-playlist');
+
+      if (player) {
+        isLoaded = true;
+        player.src = playlist;
+      }
     }
 
-    document.addEventListener("DOMContentLoaded", loadPlaylist());
     loadPlaylist();
+    document.addEventListener("DOMContentLoaded", loadPlaylist());
   })();
 </script>
