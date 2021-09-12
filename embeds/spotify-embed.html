@@ -1,5 +1,57 @@
-<iframe id="hacker-playlist" style="min-height: 50vh;width: 100%;" frameBorder="0" allowtransparency="true"
-  allow="encrypted-media"></iframe>
+<style>
+  .spotify-spinner {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .spotify-spinner svg {
+      animation: 1s linear infinite spotify-spinner;
+    }
+  }
+
+  .spotify-spinner--fade {
+    opacity: 0;
+    transition: opacity 1.5s ease-out;
+  }
+
+  .spotify-spinner--hidden {
+    animation: none;
+    display: none;
+  }
+
+  .spotify-spinner svg {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  @keyframes spotify-spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+<div style="min-height: 50vh; position: relative;">
+  <div class="spotify-spinner">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round" class="feather feather-music">
+      <title>Loading...</title>
+      <path d="M9 18V5l12-2v13"></path>
+      <circle cx="6" cy="18" r="3"></circle>
+      <circle cx="18" cy="16" r="3"></circle>
+    </svg>
+  </div>
+  <iframe id="hacker-playlist" style="position: absolute;min-height: 50vh;width: 100%;" frameBorder="0"
+    allowtransparency="true" allow="encrypted-media"></iframe>
+</div>
 <script>
   (async () => {
     let isLoaded = false;
@@ -12,15 +64,17 @@
       if (isLoaded) {
         return;
       }
-
       const player = document.getElementById('hacker-playlist');
-
       if (player) {
         isLoaded = true;
         player.src = playlist;
+        const spinner = document.querySelector('.spotify-spinner');
+        spinner.classList.add('spotify-spinner--fade');
+        setTimeout(() => {
+          //spinner.classList.add('spotify-spinner--hidden');
+        }, 2000);
       }
     }
-
     loadPlaylist();
     document.addEventListener("DOMContentLoaded", loadPlaylist());
   })();
