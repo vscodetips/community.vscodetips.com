@@ -1,6 +1,6 @@
 ## Assets and Resources for community.vscodetips.com
 
-Houses logos, social cards etc for community.vscodetips.com as well as markup for embeds on custom pages.
+Houses logos, social cards etc for [community.vscodetips.com](https://community.vscodetips.com) as well as markup for embeds on custom pages.
 
 ![Discord embedded into community.vscodetips.com](discord-embed.png)
 
